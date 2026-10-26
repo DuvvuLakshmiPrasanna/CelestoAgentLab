@@ -1,0 +1,7 @@
+{
+  "who": "Teaching assistants and instructors of programming courses (and bootcamp or hiring-test operators) who must grade hundreds of untrusted student submissions without letting a fork bomb, a forged score file or a prompt-injected note touch their own machine.",
+  "agent_work": "For each submission the agent boots a fresh sandbox, uploads the student's solution and a hidden-test grader, runs visible then hidden tests (one child process per case with time and memory limits), detects tampering with the grader's output, computes the score itself and writes a verified grade.json.",
+  "proof_output": "A grade.json produced inside the sandbox whose score equals an independently known expected score, plus a command audit log and a deleted sandbox.",
+  "idea_source": "idea_bank",
+  "idea_bank_reference": "3. Education and assessment: Hostile-submission autograder"
+}

@@ -1,0 +1,22 @@
+{
+  "cleanup_on_success": true,
+  "cleanup_on_failure": true,
+  "cleanup_on_interrupt": true,
+  "sandbox_names": [
+    "sbx-63312c0232",
+    "sbx-96e12bf8c3",
+    "sbx-ebdc454517",
+    "sbx-98c513564c",
+    "sbx-d3c80c3dc7",
+    "sbx-3ea032e76b"
+  ],
+  "persistence_stop_start_ok": true,
+  "leftover_sandboxes": [],
+  "evidence_path": "reports/evidence/lifecycle.log",
+  "mechanisms": {
+    "normal_and_failure_paths": "agent/session.py::managed_sandbox (try/finally around every guest)",
+    "interrupt": "agent/session.py::install_signal_handlers turns SIGTERM/SIGHUP into KeyboardInterrupt; Ctrl-C already is one; the finally block runs, and the in-flight guest command is killed",
+    "backstop": "agent/session.py::CleanupRegistry + atexit; `python -m agent.cli reap`",
+    "name_collisions": "agent/naming.py: sbx- + 40 random bits, never reused in-process; providers refuse duplicates"
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "failed_step": 7,
+  "total_steps": 10,
+  "policy": "rollback",
+  "rationale": "Step 7 of 10 (the hidden-test run) is the first step after the step-5 snapshot, so rolling back loses only steps 6-7. Measured over 3 runs per cell on the emulated-namespace-jail provider: rollback recovered 3/3 transient and 3/3 corrupt-workspace failures with 1 guest; resume recovered 3/3 transient but only 0/3 corrupt failures because the destroyed workspace is still destroyed; fresh recovered 3/3 and 3/3 but needed 2.0 guests and 2.092s versus 1.818s for rollback. Resume is cheapest but trusts a disk that may be damaged; fresh is the most robust but re-pays boot and upload; rollback is the middle path: a known-good disk without a reboot. If the provider has no snapshots (Celesto Cloud), rollback degrades to fresh and the trace records policy_fallback.",
+  "trace_path": "reports/failure_trace.jsonl",
+  "guest_cleanup": "every path ends with the sandbox deleted (see reports/lifecycle.json)",
+  "experiment": {
+    "submission": "wrong_fib_off_by_one",
+    "provider": "emulated-namespace-jail",
+    "repeats_per_cell": 3,
+    "cells": [
+      {
+        "policy": "resume",
+        "fault": "transient",
+        "runs": 3,
+        "recovered": 3,
+        "recovery_rate": 1.0,
+        "mean_wall_clock_s": 1.604,
+        "mean_cost_usd": 6.68e-06,
+        "mean_guests_created": 1.0,
+        "final_scores": [
+          75.0
+        ],
+        "errors": []
+      },
+      {
+        "policy": "resume",
+        "fault": "corrupt",
+        "runs": 3,
+        "recovered": 0,
+        "recovery_rate": 0.0,
+        "mean_wall_clock_s": 0.913,
+        "mean_cost_usd": 3.8e-06,
+        "mean_guests_created": 1.0,
+        "final_scores": [
+          null
+        ],
+        "errors": [
+          "step 7 failed again after recovery: solution.py is missing or changed in the guest"
+        ]
+      },
+      {
+        "policy": "rollback",
+        "fault": "transient",
+        "runs": 3,
+        "recovered": 3,
+        "recovery_rate": 1.0,
+        "mean_wall_clock_s": 1.936,
+        "mean_cost_usd": 8.07e-06,
+        "mean_guests_created": 1.0,
+        "final_scores": [
+          75.0
+        ],
+        "errors": []
+      },
+      {
+        "policy": "rollback",
+        "fault": "corrupt",
+        "runs": 3,
+        "recovered": 3,
+        "recovery_rate": 1.0,
+        "mean_wall_clock_s": 1.818,
+        "mean_cost_usd": 7.57e-06,
+        "mean_guests_created": 1.0,
+        "final_scores": [
+          75.0
+        ],
+        "errors": []
+      },
+      {
+        "policy": "fresh",
+        "fault": "transient",
+        "runs": 3,
+        "recovered": 3,
+        "recovery_rate": 1.0,
+        "mean_wall_clock_s": 2.268,
+        "mean_cost_usd": 9.45e-06,
+        "mean_guests_created": 2.0,
+        "final_scores": [
+          75.0
+        ],
+        "errors": []
+      },
+      {
+        "policy": "fresh",
+        "fault": "corrupt",
+        "runs": 3,
+        "recovered": 3,
+        "recovery_rate": 1.0,
+        "mean_wall_clock_s": 2.092,
+        "mean_cost_usd": 8.71e-06,
+        "mean_guests_created": 2.0,
+        "final_scores": [
+          75.0
+        ],
+        "errors": []
+      }
+    ],
+    "traces": "reports/evidence/policy_experiment_traces.jsonl"
+  },
+  "canonical_run": {
+    "run_id": "run-ac44c66c73",
+    "submission": "correct_basic",
+    "fault": "corrupt",
+    "policy": "rollback",
+    "success": true,
+    "score": 100.0,
+    "recoveries": 1,
+    "sandbox_names": [
+      "sbx-4f0b1851ff"
+    ]
+  }
+}

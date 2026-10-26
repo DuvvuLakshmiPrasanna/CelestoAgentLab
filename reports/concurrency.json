@@ -1,0 +1,115 @@
+{
+  "jobs": [
+    {
+      "sandbox_name": "sbx-18e1ea7884",
+      "started_at": "2026-10-26T04:50:12.298Z",
+      "run_id": "run-7c5dffad39",
+      "submission": "correct_basic",
+      "success": true,
+      "wall_clock_s": 3.8262
+    },
+    {
+      "sandbox_name": "sbx-ce33058446",
+      "started_at": "2026-10-26T04:50:12.299Z",
+      "run_id": "run-2bb6cd042f",
+      "submission": "wrong_fib_off_by_one",
+      "success": true,
+      "wall_clock_s": 3.9817
+    },
+    {
+      "sandbox_name": "sbx-5564b8cd32",
+      "started_at": "2026-10-26T04:50:12.300Z",
+      "run_id": "run-a0b1a2a1b7",
+      "submission": "exfil_attempt",
+      "success": true,
+      "wall_clock_s": 3.9399
+    },
+    {
+      "sandbox_name": "sbx-ec4cf7e634",
+      "started_at": "2026-10-26T04:50:12.311Z",
+      "run_id": "run-24b95632b8",
+      "submission": "tamper_results",
+      "success": true,
+      "wall_clock_s": 3.9413
+    },
+    {
+      "sandbox_name": "sbx-4a1efc833a",
+      "started_at": "2026-10-26T04:50:12.312Z",
+      "run_id": "run-89e037e05b",
+      "submission": "correct_recursive",
+      "success": true,
+      "wall_clock_s": 3.9565
+    },
+    {
+      "sandbox_name": "sbx-03494f8130",
+      "started_at": "2026-10-26T04:50:12.316Z",
+      "run_id": "run-fe09446a72",
+      "submission": "wrong_prime_one",
+      "success": true,
+      "wall_clock_s": 3.946
+    }
+  ],
+  "breakage_notes": "Ran (1, 6, 12) jobs at once on a 2-CPU machine; every sandbox name was unique (random 40-bit suffix, checked: True), and a deliberately duplicated name was refused by the provider (True). Peak simultaneous guests: 1, 6, 12 for concurrency 1, 6, 12; leftover guests after each level: 0. What did slow down: median per-job time went from 1.307s at 1 job to 8.012s at 12 jobs (6.1x) because the jobs share 2 CPUs; throughput rose only from 45.6 to 75.3 jobs/min. No job produced a wrong grade under load (per-case timeouts did not misfire). Shared state: audit log 1813 lines, 0 corrupt (appends use O_APPEND under a lock); ledger consistency: {'checked': True, 'rows_expected': 19, 'rows_found': 19, 'rows_not_in_final_deleted_state': 0}. Not tested here: provider rate limits and cost blow-up on Celesto Cloud (the free trial allows one retained sandbox); the emulator has no such limits, so those two risks are unmeasured.",
+  "levels": [
+    {
+      "concurrency": 1,
+      "total_wall_clock_s": 1.315,
+      "median_job_wall_clock_s": 1.307,
+      "max_job_wall_clock_s": 1.307,
+      "successes": 1,
+      "jobs": 1,
+      "peak_live_sandboxes": 1,
+      "unique_sandbox_names": true,
+      "leftover_sandboxes": [],
+      "throughput_jobs_per_min": 45.6
+    },
+    {
+      "concurrency": 6,
+      "total_wall_clock_s": 3.992,
+      "median_job_wall_clock_s": 3.944,
+      "max_job_wall_clock_s": 3.982,
+      "successes": 6,
+      "jobs": 6,
+      "peak_live_sandboxes": 6,
+      "unique_sandbox_names": true,
+      "leftover_sandboxes": [],
+      "throughput_jobs_per_min": 90.2
+    },
+    {
+      "concurrency": 12,
+      "total_wall_clock_s": 9.557,
+      "median_job_wall_clock_s": 8.012,
+      "max_job_wall_clock_s": 9.453,
+      "successes": 12,
+      "jobs": 12,
+      "peak_live_sandboxes": 12,
+      "unique_sandbox_names": true,
+      "leftover_sandboxes": [],
+      "throughput_jobs_per_min": 75.3
+    }
+  ],
+  "name_collision_test": {
+    "detected": true,
+    "error": "sandbox sbx-d5ade1987d already exists"
+  },
+  "audit_log": {
+    "lines": 1813,
+    "corrupt_lines": 0
+  },
+  "ledger_consistency": {
+    "checked": true,
+    "rows_expected": 19,
+    "rows_found": 19,
+    "rows_not_in_final_deleted_state": 0
+  },
+  "provider": "emulated-namespace-jail",
+  "environment": {
+    "python": "3.13.17",
+    "kernel": "6.18.44-fc-v153",
+    "cpus": 2,
+    "machine": "x86_64",
+    "provider": "emulated-namespace-jail",
+    "celesto_sdk_live": false,
+    "note": "Measured on a Linux namespace jail, NOT on Celesto microVMs: the build environment had no KVM and no Celesto API key. Re-generate on real Celesto with CELESTO_PROVIDER=local|cloud before quoting these as Celesto numbers."
+  }
+}

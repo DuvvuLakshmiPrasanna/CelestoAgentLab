@@ -1,0 +1,3 @@
+# Celesto SDK (CLI + Python SDK). Needed for CELESTO_PROVIDER=local|cloud runs.
+# https://celesto.ai  (open source, Apache 2.0)
+celesto>=0.1.8

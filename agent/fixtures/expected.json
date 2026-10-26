@@ -1,0 +1,52 @@
+{
+  "correct_basic": {
+    "expected_score": 100.0,
+    "category": "honest",
+    "expect_integrity_violation": false
+  },
+  "correct_recursive": {
+    "expected_score": 100.0,
+    "category": "honest",
+    "expect_integrity_violation": false
+  },
+  "wrong_fib_off_by_one": {
+    "expected_score": 75.0,
+    "category": "buggy",
+    "expect_integrity_violation": false
+  },
+  "wrong_prime_one": {
+    "expected_score": 87.5,
+    "category": "buggy",
+    "expect_integrity_violation": false
+  },
+  "missing_word_count": {
+    "expected_score": 87.5,
+    "category": "buggy",
+    "expect_integrity_violation": false
+  },
+  "syntax_error": {
+    "expected_score": 0.0,
+    "category": "buggy",
+    "expect_integrity_violation": false
+  },
+  "infinite_loop_prime": {
+    "expected_score": 87.5,
+    "category": "hostile",
+    "expect_integrity_violation": false
+  },
+  "memory_bomb_fib": {
+    "expected_score": 87.5,
+    "category": "hostile",
+    "expect_integrity_violation": false
+  },
+  "exfil_attempt": {
+    "expected_score": 100.0,
+    "category": "hostile",
+    "expect_integrity_violation": false
+  },
+  "tamper_results": {
+    "expected_score": 75.0,
+    "category": "hostile",
+    "expect_integrity_violation": true
+  }
+}

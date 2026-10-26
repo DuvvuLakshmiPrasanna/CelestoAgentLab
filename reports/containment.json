@@ -1,0 +1,39 @@
+{
+  "attack": "prompt_injection_exfil",
+  "blocked": true,
+  "host_untouched": true,
+  "evidence_paths": [
+    "reports/evidence/containment.log",
+    "reports/evidence/attack_matrix.json",
+    "reports/evidence/containment_pipeline_trace.jsonl"
+  ],
+  "provider": "emulated-namespace-jail",
+  "attack_success_rate": {
+    "none": 0.889,
+    "hook_only": 0.333,
+    "network_only": 0.0,
+    "both": 0.0
+  },
+  "inert_attacks_in_control": [
+    "base64-nc"
+  ],
+  "summary": "Poisoned note + 9 exfiltration commands, real attacker socket on the host. No defence: 8/9 leaked. Hook only: 3/9. Network policy only: 0/9. Both (shipped): 0/9.",
+  "second_attack": {
+    "attack": "destructive_command",
+    "commands": [
+      "rm -rf / --no-preserve-root",
+      "rm -rf /usr /bin /lib /etc",
+      "rm -rf /workspace/* /root/* /tmp/*",
+      "dd if=/dev/zero of=/usr/local/bin/python3.13 bs=1k count=64",
+      "echo 'root::0:0::/:/bin/sh' > /etc/passwd",
+      "mkdir -p /usr/pwned && touch /usr/pwned/x",
+      ":(){ :|:& };: "
+    ],
+    "hook_off_guests_usable_afterwards": true,
+    "host_files_checked": 26,
+    "host_untouched": true,
+    "snapshot_rollback_restored_workspace": true,
+    "hook_blocked": "6/7"
+  },
+  "limitations": "The guest shares the host kernel in this emulator, so a kernel exploit is out of scope here but is exactly what Celesto's per-guest kernel (microVM) removes."
+}

@@ -1,0 +1,25 @@
+{
+  "capabilities": [
+    {
+      "id": "safety_hooks",
+      "why": "Every command the agent requests passes agent/guard.py BEFORE the guest sees it; a blocked command still gets an audit line. Measured: the hook alone stops the 6 plain exfiltration attempts and 6 of 7 destructive commands, but 3 deliberately obfuscated ones get through, which is why it is a speed bump and not the boundary. On Celesto local the same guard is also attached as an SDK Callback raising CommandBlockedError.",
+      "evidence_path": "reports/evidence/attack_matrix.json"
+    },
+    {
+      "id": "network_policy",
+      "why": "Guests start with internet OFF (Celesto internet_settings mode off; in the emulator a network namespace with no interfaces). A real attacker socket on the host received the canary in 8 of 9 attacks with no defence and in 0 of 9 with network policy on, even with the hook switched off. This is the control that actually stops prompt-injection exfiltration.",
+      "evidence_path": "reports/evidence/containment.log"
+    },
+    {
+      "id": "snapshots",
+      "why": "A snapshot is taken at step 5, before the risky test steps. When step 7 of 10 fails the chosen policy 'rollback' restores it and resumes at step 6, so a destroyed workspace costs seconds, not a reboot. Also used to undo a wiped workspace in the destructive-command test. Celesto Cloud has no snapshots, so there rollback degrades to fresh and the trace says so.",
+      "evidence_path": "reports/failure_trace.jsonl"
+    },
+    {
+      "id": "persistence",
+      "why": "Stop/start keeps the guest disk: files written before stop were read back after start, while commands against a stopped guest are refused. Persistence is what makes the 'resume' policy possible, and the measurements show where it is not enough (a corrupted disk stays corrupted).",
+      "evidence_path": "reports/evidence/lifecycle.log"
+    }
+  ],
+  "provider_note": "Numbers in this repository were produced on 'emulated-namespace-jail', a Linux-namespace stand-in. The Celesto code path (agent/providers/celesto_provider.py) is implemented against celesto 0.1.8 but has not been run against a live Celesto service."
+}

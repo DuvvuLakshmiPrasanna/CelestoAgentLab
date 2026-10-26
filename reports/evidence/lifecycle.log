@@ -1,0 +1,12 @@
+LIFECYCLE EVIDENCE
+provider: emulated-namespace-jail
+
+[success]   run run-53adb58d52 succeeded=True; guests ['sbx-63312c0232'] deleted=True; sandbox_deleted trace event present=True
+[failure]   run run-8cd0bff4cc failed as intended=True (step 7 failed again after recovery: solution.py is missing or changed in the guest); guests ['sbx-96e12bf8c3'] deleted=True
+[exception] an unexpected RuntimeError escaped step 4 (propagated=True); guests ['sbx-ebdc454517'] deleted=True
+[interrupt] SIGINT sent to a running job while guest ['sbx-98c513564c'] was busy; exit code 130 (130 = interrupted); guests ['sbx-98c513564c'] deleted=True; stray guest processes=0
+[interrupt] SIGTERM sent to a running job while guest ['sbx-d3c80c3dc7'] was busy; exit code 130 (130 = interrupted); guests ['sbx-d3c80c3dc7'] deleted=True; stray guest processes=0
+[persistence] guest sbx-3ea032e76b stopped (commands refused while stopped=True), started again; /workspace and /root files survived=True
+
+guests alive after ALL lifecycle checks: []
+process-wide registry still holding live guests: []
